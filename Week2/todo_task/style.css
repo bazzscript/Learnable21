@@ -1,0 +1,147 @@
+*,
+*::before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  width: 100%;
+
+  background-image: url("./assets/images/wp.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+
+  /* background: linear-gradient(
+    120deg,
+    #ff0080,
+    #40e0d0,
+    #ff8c00,
+    #ff0080,
+    #40e0d0
+  );
+  background-size: 400% 400%;
+  animation: gradient 9s ease-in-out infinite; */
+}
+/* @keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+} */
+.heading {
+  font-size: 50px;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 50px;
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 450px;
+  width: 40%;
+  /* border: 2px solid white; */
+  padding: 30px 40px;
+  border-radius: 10px;
+}
+
+#newtask {
+  background-color: #ffffff;
+  padding: 20px 10px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+#newtask input {
+  width: 70%;
+  width: 70%;
+  height: 45px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 20px;
+
+  padding: 12px;
+  color: #111111;
+  font-weight: 500;
+  position: relative;
+}
+#newtask input:focus {
+  outline: none;
+  border-color: lightpink;
+  border-radius: 20px;
+}
+
+#newtask button {
+  position: relative;
+  float: right;
+
+  width: 20%;
+  font-family: "Poppins", sans-serif;
+  border-radius: 10px;
+  height: 45px;
+  font-weight: 600;
+  font-size: 15px;
+  /* border-color: #000000; */
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  background: linear-gradient(120deg, #ff8c00, #ff0080);
+}
+
+#tasks {
+  background-color: #ffffff;
+  padding: 30px 20px;
+  margin-top: 60px;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  position: relative;
+}
+
+.task {
+  background-color: #ffffff;
+  height: 50px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+}
+
+.task span {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.task button {
+  background: linear-gradient(120deg, #ff8c00, #ff0080);
+  height: 100%;
+  width: 60px;
+  color: #ffffff;
+  border-radius: 5px;
+  /* border: none; */
+  border-color: #ff8c00;
+  cursor: pointer;
+  outline: none;
+}
+
+.done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}

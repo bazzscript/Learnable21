@@ -70,6 +70,9 @@ Task: Without Using Any NodeJs Framewrokes / Librarys, develop a book lending A.
 
 6. The user should be able to return the borrowed book.
 
+
+Languages/Frameworks: NodeJs,Javascript
+
 Repo Link: https://github.com/bazzscript/Learnable21/tree/master/week7
 
 Replit Live Link : 

@@ -1,6 +1,6 @@
 # 'Hello Welcome To BazzScript Library Api !',
 
-Replit Test Link : https://replit.com/@bazzscript/BookLendingPlartform
+Replit Test Link : 
 
 ## Valid Endpoints
 ```    

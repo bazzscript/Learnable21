@@ -32,6 +32,16 @@ describe(
                     expect(newBook.status).toBe('error');
                 })
 
+                test('Return Error When Trying to Add A New Book With empty/undefined name', () => {
+                    let newBook = bazzLibrary.addBooksToLibrary({
+                        bookName: undefined,
+                        bookRating: 9.0,
+                        releaseYear: 2022,
+                        quantityAvailable: 10,
+                    });
+
+                    expect(newBook.status).toBe('error');
+                })
             }
         )
         // Test Viewing Book(s) In Our Library

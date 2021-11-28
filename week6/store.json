@@ -46,10 +46,18 @@
         {
             "bookId": 6,
             "bookName": "the book",
-            "bookRating": 23.3,
+            "bookRating": 3.3,
             "releaseYear": 2001,
             "quantityAvailable": 21,
-            "quantityRented": 8
+            "quantityRented": 0
+        },
+        {
+            "bookId": 7,
+            "bookName": "the nother book",
+            "bookRating": 10,
+            "releaseYear": 2001,
+            "quantityAvailable": 0,
+            "quantityRented": 21
         }
     ]
 }

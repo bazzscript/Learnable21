@@ -1,1 +1,55 @@
-{"nameOfStore":"BAZZscript🌴 Library","nameOfOwner":"Bezaleel Nwabia","staffs":[],"ourBooks":[{"bookId":1,"bookName":"The Art Of not Giving A Fuck","bookRating":9.5,"releaseYear":2006,"quantityAvailable":6,"quantityRented":0},{"bookId":2,"bookName":"Psychology Of Power","bookRating":10,"releaseYear":2000,"quantityAvailable":1,"quantityRented":3},{"bookId":3,"bookName":"How to win freinds and Influence People","bookRating":7,"releaseYear":2010,"quantityAvailable":2,"quantityRented":1},{"bookId":4,"bookName":"How Bazz started working as a backend developer at genesys tech hub","bookRating":9.9,"releaseYear":2022,"quantityAvailable":20,"quantityRented":1},{"bookId":5,"bookName":"The Dev Called God","bookRating":8.9,"releaseYear":2022,"quantityAvailable":9,"quantityRented":0}]}
+{
+    "nameOfStore": "BAZZscript🌴 Library",
+    "nameOfOwner": "Bezaleel Nwabia",
+    "staffs": [],
+    "ourBooks": [
+        {
+            "bookId": 1,
+            "bookName": "The Art Of not Giving A Fuck",
+            "bookRating": 9.5,
+            "releaseYear": 2006,
+            "quantityAvailable": 6,
+            "quantityRented": 0
+        },
+        {
+            "bookId": 2,
+            "bookName": "Psychology Of Power",
+            "bookRating": 10,
+            "releaseYear": 2000,
+            "quantityAvailable": 1,
+            "quantityRented": 3
+        },
+        {
+            "bookId": 3,
+            "bookName": "How to win freinds and Influence People",
+            "bookRating": 7,
+            "releaseYear": 2010,
+            "quantityAvailable": 2,
+            "quantityRented": 1
+        },
+        {
+            "bookId": 4,
+            "bookName": "How Bazz started working as a backend developer at genesys tech hub",
+            "bookRating": 9.9,
+            "releaseYear": 2022,
+            "quantityAvailable": 20,
+            "quantityRented": 1
+        },
+        {
+            "bookId": 5,
+            "bookName": "The Dev Called God",
+            "bookRating": 8.9,
+            "releaseYear": 2022,
+            "quantityAvailable": 9,
+            "quantityRented": 0
+        },
+        {
+            "bookId": 6,
+            "bookName": "the book",
+            "bookRating": 23.3,
+            "releaseYear": 2001,
+            "quantityAvailable": 1,
+            "quantityRented": 0
+        }
+    ]
+}

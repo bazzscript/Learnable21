@@ -11,8 +11,10 @@ let books = JSON.parse(storejson);
 
 const lineBreak = '\n✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭✭\n';
 const author = 'BAZZscript🌴';
-console.log(`${lineBreak} Welcome to ${author} Library ${lineBreak}`)
+if (require.main === module) {
+    console.log(`${lineBreak} Welcome to ${author} Library ${lineBreak}`)
 
+}
 
 
 
@@ -35,7 +37,6 @@ let bazzLibrary = (
         // Add a book
         // Donate a book
         function addBooksToLibrary({ bookName, bookRating, releaseYear, quantityAvailable }) {
-
             let newBook = {
                 'bookId': _books.length + 1,
                 'bookName': bookName,
@@ -213,119 +214,126 @@ let bazzLibrary = (
 
 
 
+// Dont Run When Imported
+if (require.main === module) {
 
 
 
 
 
-// ////////////////////////////////////////////////////////////////////////////////////////////////
-// SECTION 2
 
-/*
-*ACCESSING THE MINI API TO BUILD AN
-*INTERACTIVE CONSOLE APP
-*
-*/
-let userIsDone = false;
-while (userIsDone == false) {
-    console.log('MAIN MENU');
-    console.log('1. Donate a book');
-    console.log('2. View all books');
-    console.log('3. Borrow a book');
-    console.log('4. Return a book');
-    console.log('5. View borrowed books');
-    console.log('6. Exit');
+    // ////////////////////////////////////////////////////////////////////////////////////////////////
+    // SECTION 2
 
-    console.log('\n');
+    /*
+    *ACCESSING THE MINI API TO BUILD AN
+    *INTERACTIVE CONSOLE APP
+    *
+    */
+    let userIsDone = false;
+    while (userIsDone == false) {
+        console.log('MAIN MENU');
+        console.log('1. Donate a book');
+        console.log('2. View all books');
+        console.log('3. Borrow a book');
+        console.log('4. Return a book');
+        console.log('5. View borrowed books');
+        console.log('6. Exit');
 
-    let choice = parseInt(prompt('Enter your choice: '));
-    if (choice == 1) {
-        let bookName = prompt('Enter the book name: ');
-        let bookRating = parseFloat(prompt('Enter the book rating: '));
-        let releaseYear = parseInt(prompt('Enter the book release year: '));
-        let quantityAvailable = parseInt(prompt('Enter the quantity you want to donate: '));
-        let newBook = bazzLibrary.addBooksToLibrary({
-            bookName: bookName,
-            bookRating: bookRating,
-            releaseYear: releaseYear,
-            quantityAvailable: quantityAvailable,
-        });
-        console.log(lineBreak);
-        console.log(newBook.status);
-        console.log(newBook.message);
-        console.log(lineBreak);
+        console.log('\n');
 
-    }
-    // View List of Books in our store
-    else if (choice == 2) {
-        let books = bazzLibrary.viewAllBooks();
-        console.log(lineBreak);
-        if (books.status == 'error') {
-            console.log(books.message);
-        } else if (books.status == 'success') {
-            console.log(books.message);
-            console.log(books.books);
+        let choice = parseInt(prompt('Enter your choice: '));
+        if (choice == 1) {
+            let bookName = prompt('Enter the book name: ');
+            let bookRating = parseFloat(prompt('Enter the book rating: '));
+            let releaseYear = parseInt(prompt('Enter the book release year: '));
+            let quantityAvailable = parseInt(prompt('Enter the quantity you want to donate: '));
+            let newBook = bazzLibrary.addBooksToLibrary({
+                bookName: bookName,
+                bookRating: bookRating,
+                releaseYear: releaseYear,
+                quantityAvailable: quantityAvailable,
+            });
+            console.log(lineBreak);
+            console.log(newBook.status);
+            console.log(newBook.message);
+            console.log(lineBreak);
+
         }
-        console.log(lineBreak);
+        // View List of Books in our store
+        else if (choice == 2) {
+            let books = bazzLibrary.viewAllBooks();
+            console.log(lineBreak);
+            if (books.status == 'error') {
+                console.log(books.message);
+            } else if (books.status == 'success') {
+                console.log(books.message);
+                console.log(books.books);
+            }
+            console.log(lineBreak);
+
+        }
+
+
+        // Borrow a Book
+        else if (choice == 3) {
+            let books = bazzLibrary.viewAllBooks();
+            console.log(lineBreak);
+            console.log(books);
+            let bookId = parseInt(prompt('Enter the "bookid" of the book you want to borrow: '));
+            let borrowedBook = bazzLibrary.borrowBook({
+                id: bookId,
+            });
+            console.log(lineBreak);
+            console.log(borrowedBook.status);
+            console.log(borrowedBook.message);
+            console.log(lineBreak);
+        }
+        // Return borrrowed books
+        else if (choice == 4) {
+            bazzLibrary.viewAllBooks;
+            let bookId = parseInt(prompt('Enter the book id: '));
+            let returnedBook = bazzLibrary.returnBorrowedBook({
+                id: bookId,
+            });
+            console.log(lineBreak);
+            console.log(returnedBook.status);
+            console.log(returnedBook.message);
+            console.log(lineBreak);
+
+        }
+        // View borrowed books
+        else if (choice == 5) {
+            console.log(lineBreak);
+            let borrowedBooks = bazzLibrary.viewBorrowedBooks();
+            console.log(lineBreak);
+            console.log(borrowedBooks.status);
+            console.log(borrowedBooks.message);
+            console.log(borrowedBooks.books);
+            console.log(lineBreak);
+
+        }
+
+        //Exit
+        else if (choice == 6) {
+            //Thanks User For Visiting Our Library
+            storejson = JSON.stringify(books);
+            fs.writeFileSync(storeFilePath, storejson, "utf-8");
+            console.log(lineBreak);
+            console.log(`Thank You For Visiting ${author} Library Today.`);
+            console.log("We hope you enjoyed your time here.");
+            console.log(lineBreak);
+            userIsDone = true;
+        }
+
+        else {
+            console.log(`${lineBreak}Invalid Choice / Menu Option ${lineBreak}`);
+        }
+
 
     }
-
-
-    // Borrow a Book
-    else if (choice == 3) {
-        let books = bazzLibrary.viewAllBooks();
-        console.log(lineBreak);
-        console.log(books);
-        let bookId = parseInt(prompt('Enter the "bookid" of the book you want to borrow: '));
-        let borrowedBook = bazzLibrary.borrowBook({
-            id: bookId,
-        });
-        console.log(lineBreak);
-        console.log(borrowedBook.status);
-        console.log(borrowedBook.message);
-        console.log(lineBreak);
-    }
-    // Return borrrowed books
-    else if (choice == 4) {
-        bazzLibrary.viewAllBooks;
-        let bookId = parseInt(prompt('Enter the book id: '));
-        let returnedBook = bazzLibrary.returnBorrowedBook({
-            id: bookId,
-        });
-        console.log(lineBreak);
-        console.log(returnedBook.status);
-        console.log(returnedBook.message);
-        console.log(lineBreak);
-
-    }
-    // View borrowed books
-    else if (choice == 5) {
-        console.log(lineBreak);
-        let borrowedBooks = bazzLibrary.viewBorrowedBooks();
-        console.log(lineBreak);
-        console.log(borrowedBooks.status);
-        console.log(borrowedBooks.message);
-        console.log(borrowedBooks.books);
-        console.log(lineBreak);
-
-    }
-
-    //Exit
-    else if (choice == 6) {
-        //Thanks User For Visiting Our Library
-        storejson = JSON.stringify(books);
-        fs.writeFileSync(storeFilePath, storejson, "utf-8");
-        console.log(lineBreak);
-        console.log(`Thank You For Visiting ${author} Library Today.`);
-        console.log("We hope you enjoyed your time here.");
-        console.log(lineBreak);
-        userIsDone = true;
-    }
-
-    else {
-        console.log(`${lineBreak}Invalid Choice / Menu Option ${lineBreak}`);
-    }
-
+}
+else {
+    module.exports = bazzLibrary;
 
 }
-

@@ -84,7 +84,7 @@ let bazzLibrary = (
 
         //View A particular book
         function viewBookInLibrary(bookId) {
-            let book = _books.find(book => book.bookId === id);
+            let book = _books.find(book => book.bookId === bookId);
 
             if (book) {
                 return {
@@ -333,7 +333,6 @@ if (require.main === module) {
 
     }
 }
-else {
-    module.exports = bazzLibrary;
 
-}
+module.exports = bazzLibrary;
+

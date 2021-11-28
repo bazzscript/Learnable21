@@ -104,6 +104,18 @@ describe(
 
                 )
 
+                // Return Error When Trying to borrow a book that doesnt exist
+                test('Return Error When Trying to borrow a book that doesnt exist',
+
+                    () => {
+                        let borrowedBook = bazzLibrary.borrowBook({
+                            id: 17,
+                        })
+                        expect(borrowedBook.status).toBe('error');
+                    }
+
+                )
+
 
             }
         )

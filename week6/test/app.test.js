@@ -51,7 +51,9 @@ describe(
 
         // Test Borrowing A Book From The Library
         test('Borrow A Book From The Library When Given A Valid Id', () => {
-            let borrowedBook = bazzLibrary.borrowBook(1);
+            let borrowedBook = bazzLibrary.borrowBook({
+                id: 1,
+            });
             expect(borrowedBook.status).toBe('success');
         })
 
@@ -70,7 +72,11 @@ describe(
 
         // Test Returning A Book To The Library
         test('Return A Book To The Library When Given A Valid Id', () => {
-            let returnedBook = bazzLibrary.returnBorrowedBook(3);
+            let returnedBook = bazzLibrary.returnBorrowedBook(
+                {
+                    id: 3,
+                }
+            );
             expect(returnedBook.status).toBe('success');
         })
 

@@ -1,0 +1,33 @@
+USER
+✅ Login
+Transaction 
+ Deposit
+ Withdrawal
+ Transaction_History
+
+
+
+
+
+ADMIN
+Transaction management
+ Transaction Reversal
+
+Account management 
+✅ Create New User
+✅ Delete User
+✅ Disable User
+
+
+
+
+
+
+Security In Development
+✅ implement .env
+✅ Fix password in plain text
+✅ use jwt for auth
+
+
+OTHER
+check account balance

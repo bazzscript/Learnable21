@@ -1,0 +1,14 @@
+
+rewatch the jwt video,and code along
+
+
+
+how to keep a user loged in , nodejs backend
+
+
+look at source code user authnetication...but in our case only an admin can acces the create user routes and the create user route will be tweaked and customized to our liking
+
+
+
+
+Get Account Number from token of logedin user , the token should contain an account number which you will add to the request body on each request

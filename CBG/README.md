@@ -173,16 +173,24 @@ Expecting User "token" At The Request Header, if you dont understand see "LOG IN
 
 ---------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
 ### REVERSE TRANSACTION
 
+URL: http://localhost:5000/api/v1/users/transaction/reverse
+
+HTTP METHOD: GET
+
+Expecting a JSON object with the following fields: 
+
+```
+{
+    transactionId: "String",    
+}
+```
 ---------------------------------------------------------------------------------------------------------------------
 
-TESTING
+
+<!-- TESTING
 All Test Must Be Simple, So Simple That Even A Non-Programmer Will Look At It And Understand It.
 
 Things Tested:
-- Controllers
+- Controllers -->

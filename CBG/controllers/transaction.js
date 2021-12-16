@@ -301,7 +301,7 @@ transaction.reverse = async ({ transaction_id }) => {
             return {
                 status: "error",
                 statuscode: 404,
-                message: 'Transaction Not Found'
+                message: 'Transaction ID Not Found'
             }
         }
 

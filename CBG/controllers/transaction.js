@@ -8,7 +8,7 @@ const transaction = {}
 
 // Add or Deposit Money To Account Balance
 transaction.deposit = async ({ amount, beneficiaryAccountNumber }) => {
-    try {
+;    try {
         const user = await User.findOne({ accountNumber: beneficiaryAccountNumber });
 
         //Confirm Account Exists
@@ -93,15 +93,12 @@ transaction.withdraw = async ({ amount, accountNumber }) => {
             { new: true }
         )
 
-        // Create Transaction
-        const transaction = new Transaction({
+        // Create And Save Transaction
+        const transaction = await new Transaction({
             accountNumber,
             transaction_amount: amount,
             transaction_type: 'withdraw'
-        })
-
-        // Save Transaction
-        await transaction.save();
+        }).save();
 
         return {
             status: "success",
@@ -159,40 +156,20 @@ transaction.transfer = async ({ amount, sendersAccountNumber, recieversAccountNu
             }
         }
 
-        // Subtract Amount From Senders Account and Add Amount to recievers Account
-        const newBalanceSender = await sendersAccount.balance - amount;
-        const newBalanceReciever = await recieversAccount.balance + amount;
-
-
-        // Update Senders Account Balance
+        // Subtract Amount From Senders Account And Update
+        const newBalance = sendersAccount.balance - amount;
         await User.findOneAndUpdate(
             { accountNumber: sendersAccountNumber },
-            { balance: newBalanceSender },
+            { balance: newBalance },
             { new: true }
         )
 
-        // Update Recievers Account Balance
+        // Add Amount to Recievers Account And Update
+        const newRecieversBalance = recieversAccount.balance + amount;
         await User.findOneAndUpdate(
             { accountNumber: recieversAccountNumber },
-            { balance: newBalanceReciever },
-            { new: true },
-
-            (err, updatedAccount) => {
-                if (err) {
-                    return {
-                        status: "error",
-                        statuscode: 500,
-                        message: 'Internal Server Error'
-                    }
-                } else {
-                    return {
-                        status: "success",
-                        statuscode: 200,
-                        message: `Money Transfered to ${recieversAccount.name} Successfully`,
-                        data: updatedAccount
-                    }
-                }
-            }
+            { balance: newRecieversBalance },
+            { new: true }
         )
 
         // Create and Save Transaction
@@ -203,13 +180,17 @@ transaction.transfer = async ({ amount, sendersAccountNumber, recieversAccountNu
             transaction_type: 'transfer'
         }).save();
 
+
+        // Return Transaction Success
         return {
             status: "success",
             statuscode: 200,
             message: 'Transfer Successful',
             data: {
                 transaction_id: transaction.transaction_id,
+                sendersName: sendersAccount.name,
                 senderAccount: transaction.senderAccountNumber,
+                recieversName: recieversAccount.name,
                 recieverAccount: transaction.recieverAccountNumber,
                 transaction_amount: transaction.transaction_amount,
                 transaction_type: transaction.transaction_type,

@@ -28,7 +28,7 @@ router.delete('/:id', async (req, res) => {
 
 
 // Disable user
-router.put('/disable/:id', async (req, res) => {
+router.patch('/disable/:id', async (req, res) => {
     const response = await UserController.disableUser(req.params.id);
     if (response.status == 'error') {
         res.status(400).json(response);
@@ -37,7 +37,7 @@ router.put('/disable/:id', async (req, res) => {
 });
 
 // Enable user
-router.put('/enable/:id', async (req, res) => {
+router.patch('/enable/:id', async (req, res) => {
     const response = await UserController.enableUser(req.params.id);
     if (response.status == 'error') {
         res.status(400).json(response);

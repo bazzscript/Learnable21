@@ -14,6 +14,9 @@ const DATABASE_URL = process.env.DATABASE_URL.toString();
 // Middlewares, our app runs before each request gets to our server
 app.use(express.json());
 
+// Enable body parser
+app.use(express.urlencoded({ extended: true }));
+
 
 // ROUTES
 

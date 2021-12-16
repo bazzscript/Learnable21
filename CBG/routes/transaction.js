@@ -9,10 +9,10 @@ const userauth = require("./../middlewares/userauth")
 const TransactionController = require('../controllers/transaction');
 
 // Deposit Money To Account
-router.patch('/deposit', userauth(), async (req, res) => {
-    const data = req.body;
+router.post('/deposit', userauth(), async (req, res) => {
+    const data = await req.body;
     const response = await TransactionController.deposit({
-        accountNumber: data.AuthAccountNumber,
+        beneficiaryAccountNumber: data.AuthAccountNumber,
         amount: data.amount,
     });
 
@@ -27,7 +27,7 @@ router.patch('/deposit', userauth(), async (req, res) => {
 
 
 // Withdraw Money From Account
-router.patch('/withdraw', userauth(), async (req, res) => {
+router.post('/withdraw', userauth(), async (req, res) => {
     const data = req.body;
     const response = await TransactionController.withdraw({
         accountNumber: data.AuthAccountNumber,
@@ -46,13 +46,13 @@ router.patch('/withdraw', userauth(), async (req, res) => {
 })
 
 // Transfer To Another User Account
-router.patch('/transfer', userauth(), async (req, res) => {
+router.post('/transfer', userauth(), async (req, res) => {
     const data = req.body;
     const response = await TransactionController.transfer(
         {
             amount: data.amount,
             sendersAccountNumber: data.AuthAccountNumber,
-            recieversAccountNumber: data.recieversAccountNumber
+            recieversAccountNumber: data.recieversAccount
         })
     if (response.statuscode == 404) {
         res.status(404).json(response);
@@ -69,6 +69,22 @@ router.patch('/transfer', userauth(), async (req, res) => {
 router.get('/history', userauth(), async (req, res) => {
     const data = req.body;
     const response = await TransactionController.history({
+        accountNumber: data.AuthAccountNumber,
+    });
+    if (response.statuscode == 404) {
+        res.status(404).json(response);
+    }
+    if (response.statuscode == 500) {
+        res.status(500).json(response);
+    }
+    res.status(200).json(response);
+})
+
+
+// Check Balance
+router.get('/balance', userauth(), async (req, res) => {
+    const data = req.body;
+    const response = await TransactionController.checkBalance({
         accountNumber: data.AuthAccountNumber,
     });
     if (response.statuscode == 404) {

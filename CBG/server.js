@@ -58,4 +58,7 @@ app.listen(PORT, async () => {
     }
 
     console.log(`===> listening on http://localhost:${PORT}`)
+    console.log(`===> ${new Date()}`)
+    console.log(`===> Central Bank Of Genesys is online!`)
+    console.log(`===> See The README.md file to get started using our API`)
 });

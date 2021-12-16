@@ -97,4 +97,24 @@ router.get('/balance', userauth(), async (req, res) => {
 })
 
 
+// Reverse a transaction
+router.post('/reverse', async (req, res) => {
+    const data = req.body;
+
+    const response = await TransactionController.reverse({
+        transaction_id: data.transactionId,
+    });
+    if (response.statuscode == 404) {
+        res.status(404).json(response);
+    }
+    if (response.statuscode == 400){
+        res.status(400).json(response);
+    }
+    if (response.statuscode == 500) {
+        res.status(500).json(response);
+    }
+    res.status(200).json(response);
+})
+
+
 module.exports = router

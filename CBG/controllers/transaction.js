@@ -262,8 +262,6 @@ transaction.history = async ({ accountNumber }) => {
 
         //get list of transaction with accountNumber
         const transactions = await Transaction.find({ accountNumber });
-        const userings = await User.find({ isUserAdmin: false });
-
 
         // Confirm transaction exist
         if (!transactions) {
@@ -280,7 +278,6 @@ transaction.history = async ({ accountNumber }) => {
             statuscode: 200,
             message: `${user.name} Transaction History`,
             data: transactions,
-            testfkight: userings
         }
     } catch (error) {
         return {
@@ -293,6 +290,180 @@ transaction.history = async ({ accountNumber }) => {
 }
 
 
+// Reverse A Transaction
+transaction.reverse = async ({ transaction_id }) => {
+    console.log(transaction_id);
+    try {
+        const transaction = await Transaction.findOne({ transaction_id });
+
+        // Confirm Transaction Exists
+        if (!transaction) {
+            return {
+                status: "error",
+                statuscode: 404,
+                message: 'Transaction Not Found'
+            }
+        }
+
+        // Confirm Transaction is not reversed
+        if (transaction.transaction_type === 'reverse') {
+            return {
+                status: "error",
+                statuscode: 400,
+                message: 'Transaction Already Reversed'
+            }
+        }
+
+        // Check What Type Of Transaction It Is
+
+        // DEPOSIT
+        else if (transaction.transaction_type === 'deposit') {
+            // Get Account
+            const account = await User.findOne({ accountNumber: transaction.accountNumber });
+
+            // Confirm Account Exists
+            if (!account) {
+                return {
+                    status: "error",
+                    statuscode: 404,
+                    message: 'Account Not Found Or Doesnt Exist Anymore'
+                }
+            }
+
+            // Confirm Account has enough money to reverse
+            if (account.balance < transaction.transaction_amount) {
+                return {
+                    status: "error",
+                    statuscode: 400,
+                    message: 'Insufficient Funds In your Account, Reversal Failed'
+                }
+            }
+
+            // Subtract Amount to Account And Update
+            const newBalance = await account.balance - transaction.transaction_amount;
+            await User.findOneAndUpdate(
+                { accountNumber: transaction.accountNumber },
+                { balance: newBalance },
+                { new: true }
+            )
+
+            // Update Transaction Type
+            await Transaction.findOneAndUpdate(
+                { transaction_id: transaction_id },
+                { transaction_type: 'reverse' },
+                { new: true }
+            )
+
+            return {
+                status: "success",
+                statuscode: 200,
+                message: 'Transaction Reversed',
+            }
+
+        }
+        
+        // WITHDRAWAL
+        else if (transaction.transaction_type === 'withdraw') {
+            // Get Account
+            const account = await User.findOne({ accountNumber: transaction.accountNumber });
+
+            // Confirm Account Exists
+            if (!account) {
+                return {
+                    status: "error",
+                    statuscode: 404,
+                    message: 'Account Not Found Or Doesnt Exist Anymore'
+                }
+            }
+
+            // Add Amount to Account And Update
+            const newBalance = await account.balance + transaction.transaction_amount;
+            await User.findOneAndUpdate(
+                { accountNumber: transaction.accountNumber },
+                { balance: newBalance },
+                { new: true }
+            )
+
+            // Update Transaction Type
+            await Transaction.findOneAndUpdate(
+                { transaction_id: transaction_id },
+                { transaction_type: 'reverse' },
+                { new: true }
+            )
+
+            return {
+                status: "success",
+                statuscode: 200,
+                message: 'Transaction Reversed',
+            }
+        }
+
+        // TRANSFER
+        else if (transaction.transaction_type === 'transfer') {
+
+                        // Get sendersAccount
+                        const sendersAccount = await User.findOne({ accountNumber: transaction.senderAccountNumber });
+
+                        // Get recieversAccount
+                        const recieversAccount = await User.findOne({ accountNumber: transaction.recieverAccountNumber });
+
+                        // Confirm Senders Account Exists
+                        if (!sendersAccount) {
+                            return {
+                                status: "error",
+                                statuscode: 404,
+                                message: 'Senders Account Not Found Or Doesnt Exist Anymore'
+                            }
+                        }
+
+                        // Confirm Recievers Account Exists
+                        if (!recieversAccount) {
+                            return {
+                                status: "error",
+                                statuscode: 404,
+                                message: 'Recievers Account Not Found Or Doesnt Exist Anymore'
+                            }
+                        }
+
+                        // Add Amount to Senders Account And Update
+                        const newBalance = await sendersAccount.balance - transaction.transaction_amount;
+                        await User.findOneAndUpdate(
+                            { accountNumber: transaction.senderAccountNumber },
+                            { balance: newBalance },
+                            { new: true }
+                        )
+
+                        // Subtract Amount From Recievers Account And Update
+                        const newBalance2 = await recieversAccount.balance + transaction.transaction_amount;
+                        await User.findOneAndUpdate(
+                            { accountNumber: transaction.recieverAccountNumber },
+                            { balance: newBalance2 },
+                            { new: true }
+                        )
+            
+                        // Update Transaction Type
+                        await Transaction.findOneAndUpdate(
+                            { transaction_id: transaction_id },
+                            { transaction_type: 'reverse' },
+                            { new: true }
+                        )
+            
+                        return {
+                            status: "success",
+                            statuscode: 200,
+                            message: 'Transaction Reversed',
+                        }
+        }
+
+
+    } catch (error) {
+        return {
+            status: "error",
+            statuscode: 500,
+            message: 'Internal Server Error, please try again. If this error persists, please contact us to fix'
+        }
+    }
+}
 
 
 

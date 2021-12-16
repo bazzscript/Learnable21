@@ -1,11 +1,9 @@
 USER
 ✅ Login
 Transaction 
- Deposit
- Withdrawal
- Transaction_History
-
-
+ ✅ Deposit
+ ✅ Withdrawal
+ ✅ Transaction_History
 
 
 
@@ -20,9 +18,6 @@ Account management
 
 
 
-
-
-
 Security In Development
 ✅ implement .env
 ✅ Fix password in plain text
@@ -30,4 +25,4 @@ Security In Development
 
 
 OTHER
-check account balance
+✅ check account balance

@@ -95,7 +95,7 @@ Expecting a JSON object with the following fields:
 }
 ```
 
-please make sure to note/copy down the generated accessToken once you login. And afterwards add it to the header of all your requests from here donwards,  as "token".
+please make sure to note/copy down the generated accessToken once you login. And afterwards add it to the header of all your requests from here downwards,  as "token".
 
 ---------------------------------------------------------------------------------------------------------------------
 
@@ -177,7 +177,7 @@ Expecting User "token" At The Request Header, if you dont understand see "LOG IN
 
 URL: http://localhost:5000/api/v1/users/transaction/reverse
 
-HTTP METHOD: GET
+HTTP METHOD: POST
 
 Expecting a JSON object with the following fields: 
 

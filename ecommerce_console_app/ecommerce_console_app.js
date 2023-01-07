@@ -46,96 +46,15 @@ let products = [
 let cart = [];
 
 
+// Application Intro
 console.log("Welcome to Nancy shopping app 🛍️...");
 console.log(">>>>>>>>>>");
 console.log(products);
 console.log(">>>>>>>>>>");
 let keepAppRunning = prompt("Press 'M'  to start making an order, press  'Q'  to quit >>>> ");
 let makingChoice = true;
-let makeOrder;
+let choice;
 
-
-
-while (makingChoice === true) {
-    // Convert the string inside the keepAppRunning variable to lowercase
-    keepAppRunning.toLowerCase();
-
-    // if keepAppRunning equals "q", Exit the console application
-    if (keepAppRunning === "q") {
-        makingChoice = false;
-        console.log("Thank you for visiting us,lol");
-        break;
-    }
-    console.log(products);
-    let choice = prompt(
-        " Choose from the following options:\n A. View Cart 🛒\n B. Add a product to Cart 🛒\n C. Remove a product from cart 🛒\n D. Increase Quantity of Product in Cart 🛒\n E. Decrease Quantity of Product in Cart 🛒\n F. Checkout 💳 \n Q. Exit Application \n\n"
-    );
-    choice = choice.toLowerCase();
-
-    if(choice === "q"){
-        makingChoice = false;
-        console.log("Thank you for visiting us,lol");
-        break;
-    }
-    if (choice === "a") {
-        if (cart.length < 1) {
-            console.log(" Your cart is empty")
-        }
-        if (cart.length >= 1) {
-            console.log(" Your cart 🛒")
-            console.log(getAllItemsFromCart());
-        }
-    }
-
-    else if (choice === "b") {
-        let productId = prompt("What is the id of the product you want to order? ");
-        productId = Number(productId);
-
-        try {
-            addItemToCart(productId);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
-    else if (choice === "c") {
-        let productId = prompt("What is the id of the product you want to order? ");
-        productId = Number(productId);
-
-        try {
-            removeItemFromCart(productId);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
-    else if (choice === "d") {
-        let productId = prompt("What is the id of the product you want to order? ");
-        productId = Number(productId);
-        try {
-            incrementItem(productId);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
-    else if (choice === "e") {
-        let productId = prompt("What is the id of the product you want to order? ");
-        productId = Number(productId);
-
-        try {
-            decrementItem(productId);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
-    else if (choice === "f") {
-        let total = checkOut();
-        console.log(total);
-    }
-
-}
 
 
 // Validate Product And Make Sure It Exists
@@ -145,7 +64,7 @@ const validateProduct = (id) => {
 
     // if no item exists throw an error
     if (!item) {
-        throw Error("Item with id does not exist!");
+        throw Error("\n\n\nItem with id does not exist!\n\n\n");
     }
     return item;
 };
@@ -212,7 +131,176 @@ const decrementItem = (id) => {
     }
 };
 
+// Mock check out
 const checkOut = () => {
+    if (cart.length < 1){
+        return 0;
+    }
     let totalCart = cart.map((item) => item.price).reduce((a, b) => a + b);
     return totalCart;
 };
+
+
+while (makingChoice === true) {
+    // Convert the string inside the keepAppRunning variable to lowercase
+    keepAppRunning.toLowerCase();
+
+    // if keepAppRunning equals "q", Exit the console application
+    if (keepAppRunning === "q") {
+        makingChoice = false;
+        console.log("");
+        console.log("");
+        console.log(">>>>>>>>>>");
+        console.log("Thank you for visiting us,lol");
+        console.log(">>>>>>>>>>");
+        console.log("");
+        console.log("");
+        break;
+    }
+
+    choice = prompt(
+        " Choose from the following options:\n A. View Cart 🛒\n B. Add a product to Cart 🛒\n C. Remove a product from cart 🛒\n D. Increase Quantity of Product in Cart 🛒\n E. Decrease Quantity of Product in Cart 🛒\n F. Checkout 💳 \n Q. Exit Application \n\n"
+    );
+
+    choice = choice.toLowerCase();
+
+    if (choice === "q") {
+        makingChoice = false;
+        console.log("");
+        console.log("");
+        console.log(">>>>>>>>>>");
+        console.log("Thank you for visiting us,lol");
+        console.log(">>>>>>>>>>");
+        console.log("");
+        console.log("");
+
+        break;
+    }
+
+    if (choice === "a") {
+        if (cart.length < 1) {
+            console.log("");
+            console.log("");
+            console.log(">>>>>>>>>>");
+            console.log(" Your cart is empty")
+            console.log(">>>>>>>>>>");
+            console.log("");
+            console.log("");
+
+
+
+        }
+        if (cart.length >= 1) {
+            console.log("");
+            console.log("");
+            console.log(">>>>>>>>>>");
+            console.log(" Your cart 🛒")
+            console.log(getAllItemsFromCart());
+            console.log(">>>>>>>>>>");
+            console.log("");
+            console.log("");
+
+
+        }
+    }
+
+    else if (choice === "b") {
+        console.log("");
+        console.log("");
+        console.log(">>>>>>>>>>");
+        let productId = prompt("What is the id of the product you want to order? ");
+        console.log(">>>>>>>>>>");
+        console.log("");
+        console.log("");
+        productId = Number(productId);
+
+        try {
+            console.log("");
+            console.log("");
+            console.log(">>>>>>>>>>");
+            addItemToCart(productId);
+            console.log(" Your cart 🛒")
+            console.log(getAllItemsFromCart());
+            console.log(">>>>>>>>>>");
+            console.log(" ");
+            console.log("");
+
+            
+
+        } catch (error) {
+            console.log("");
+            console.log("");
+            console.log(">>>>>>>>>>");
+            console.log(error.message);
+            console.log(">>>>>>>>>>");
+            console.log("");
+            console.log("");
+
+        }
+    }
+
+    else if (choice === "c") {
+        console.log("");
+        console.log("");
+        console.log(">>>>>>>>>>");
+        let productId = prompt("What is the id of the product you want to order? ");
+        console.log(">>>>>>>>>>");
+        console.log("");
+        console.log("");
+        productId = Number(productId);
+
+        try {
+            removeItemFromCart(productId);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    else if (choice === "d") {
+        console.log("");
+        console.log("");
+        console.log(">>>>>>>>>>");
+        let productId = prompt("What is the id of the product you want to increase in your cart? >>> ");
+        console.log(">>>>>>>>>>");
+        console.log("");
+        console.log("");
+        productId = Number(productId);
+        try {
+            incrementItem(productId);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    else if (choice === "e") {
+        console.log("");
+        console.log("");
+        console.log(">>>>>>>>>>");
+        let productId = prompt("What is the id of the product you want to decrease its quantity inside cart? >>>  ");
+        console.log(">>>>>>>>>>");
+        console.log("");
+        console.log("");
+        productId = Number(productId);
+
+        try {
+            decrementItem(productId);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    else if (choice === "f") {
+        let total = checkOut();
+        console.log("");
+        console.log("");
+        console.log(">>>>>>>>>>");
+        console.log("CheckOut Complete");
+        console.log("Total Payment: $" + total);
+        console.log(">>>>>>>>>>");
+        console.log("");
+        console.log("");
+    }
+
+}
+
+

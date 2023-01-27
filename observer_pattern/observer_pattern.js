@@ -18,21 +18,21 @@ class Telephone {
       console.log("Invalid phone number");
       return;
     }
-    // console.log("Dialling " + number + "...");
-    this.NotifyObservers(number);
+    console.log("Dialling " + number + "...");
+    this.notifyObservers(number);
   }
 
 
 // Observers
-  AddObserver(observer) {
+  addObserver(observer) {
     this.observers.push(observer);
   }
 
-  RemoveObserver(observer) {
+  removeObserver(observer) {
     this.observers = this.observers.filter(o => o !== observer);
   }
 
-  NotifyObservers(number) {
+  notifyObservers(number) {
     this.observers.forEach(observer => observer.notify(number));
   }
 }
@@ -61,10 +61,9 @@ const dialingObserver = new DialingObserver();
 
 
 
-phone.AddObserver(phoneNumberObserver);
-phone.AddObserver(dialingObserver);
+phone.addObserver(phoneNumberObserver);
+phone.addObserver(dialingObserver);
 
 
 phone.addPhoneNumber("09061147343");
-
 phone.dialPhoneNumber("09061147343");

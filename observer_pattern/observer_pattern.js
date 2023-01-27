@@ -18,7 +18,7 @@ class Telephone {
       console.log("Invalid phone number");
       return;
     }
-    console.log("Dialling " + number + "...");
+    // console.log("Dialling " + number + "...");
     this.NotifyObservers(number);
   }
 
@@ -33,7 +33,7 @@ class Telephone {
   }
 
   NotifyObservers(number) {
-    this.observers.forEach(observer => observer.OnDial(number));
+    this.observers.forEach(observer => observer.notify(number));
   }
 }
 
@@ -41,13 +41,13 @@ class Telephone {
 
 // 
 class PhoneNumberObserver {
-  OnDial(number) {
+  notify(number) {
     console.log(number);
   }
 }
 
 class DialingObserver {
-  OnDial(number) {
+ notify(number) {
     console.log("Now dialling the number: " + number);
   }
 }
@@ -65,8 +65,6 @@ phone.AddObserver(phoneNumberObserver);
 phone.AddObserver(dialingObserver);
 
 
-phone.addPhoneNumber("123-456-7890");
-phone.dialPhoneNumber("123-456-7890");
+phone.addPhoneNumber("09061147343");
 
-phone.addPhoneNumber("123-456-7899");
-phone.dialPhoneNumber("123-456-7899");
+phone.dialPhoneNumber("09061147343");
